@@ -1,6 +1,21 @@
-import { Link } from "react-router-dom"
+import { useContext } from "react";
+import { Link, useNavigate } from "react-router-dom"
+import { AuthContext } from "../../contexts/AuthContext";
 
 function Navbar() {
+
+    const navigate = useNavigate();
+
+    // Consumo do Contexto AuthContext
+    // usamos a desestruturação para selecionar apenas o que precisamos
+    const { handleLogout } = useContext(AuthContext);
+
+    function logout() {
+  handleLogout();
+  alert('O Usuário foi desconectado com sucesso!');
+  navigate("/");
+}
+
   return (
     <>
     {/* w-full = width: 100%, p-4 = padding: 1rem */}
@@ -13,11 +28,21 @@ function Navbar() {
 
            {/* flex = display: flex, gap-4 = gap: 1rem */}
           <div className='flex gap-4'>
-            Postagens
-            Temas
-            Cadastrar tema
-            Perfil
-            Sair
+            <Link to="/postagens" className="hover:text-indigo-300">
+              Postagens
+            </Link>
+            <Link to="/temas" className="hover:text-indigo-300">
+              Temas
+            </Link>
+            <Link to="/cadastro" className="hover:text-indigo-300">
+              Cadastrar
+            </Link>
+            <Link to="/perfil" className="hover:text-indigo-300">
+              Perfil
+            </Link>
+            <Link to='' onClick={logout} className="hover:text-indigo-300">
+              Sair
+            </Link>
           </div>
         </div>
       </div>
