@@ -31,9 +31,11 @@ function Navbar() {
             <Link to="/postagens" className="hover:text-indigo-300">
               Postagens
             </Link>
+
             <Link to="/temas" className="hover:text-indigo-300">
               Temas
             </Link>
+            <Link to='/cadastrartema' className='hover:underline'>Cadastrar tema</Link>
             <Link to="/cadastro" className="hover:text-indigo-300">
               Cadastrar
             </Link>

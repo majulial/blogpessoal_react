@@ -198,6 +198,4 @@ console.log(confirm);
 
 export default Cadastro
 
-function retornar() {
-  throw new Error("Function not implemented.");
-}
+
