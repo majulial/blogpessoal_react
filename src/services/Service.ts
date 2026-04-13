@@ -2,7 +2,7 @@ import axios from "axios";
 
 //criação de uma instância do axios para ser utilizada em toda a aplicação
 const api  = axios.create({
-  baseURL: "https://blogpessoal-nest-w5ja.onrender.com"
+  baseURL: import.meta.env.VITE_API_URL
 })
 
 

@@ -1,6 +1,7 @@
-import { useContext } from "react";
+import { useContext, type ReactNode } from "react";
 import { Link, useNavigate } from "react-router-dom"
 import { AuthContext } from "../../contexts/AuthContext";
+import { ToastAlerta } from "../../utils/ToastAlerta";
 
 function Navbar() {
 
@@ -8,20 +9,24 @@ function Navbar() {
 
     // Consumo do Contexto AuthContext
     // usamos a desestruturação para selecionar apenas o que precisamos
-    const { handleLogout } = useContext(AuthContext);
+    const { handleLogout, usuario } = useContext(AuthContext);
 
     function logout() {
   handleLogout();
-  alert('O Usuário foi desconectado com sucesso!');
+  ToastAlerta('O Usuário foi desconectado com sucesso!', 'info')
   navigate("/");
 }
 
-  return (
-    <>
-    {/* w-full = width: 100%, p-4 = padding: 1rem */}
+let component: ReactNode
+
+if (usuario.token !== "") {
+  component = (
+    // w-full = width: 100%, p-4 = padding: 1rem
+    
       <div className='w-full flex justify-center py-4 bg-indigo-900 text-white'>
-        {/* container = define a largura máxima fixa e centraliza toda margin deixando left e right auto, mx-8 = margin left e right 2rem, text-lg = font-size: 1.125rem line-height: 1.75 */}
+        {/* container = define a largura máxima fixa e centraliza toda margin deixando left e right auto, mx-8 = margin left e right 2rem, text-lg = font-size: 1.125rem line-height: 1.75  */}
         <div className="container flex justify-between text-lg mx-8">
+
           <Link to="/home" className="font-bold text-2xl">
           Blog Pessoal
           </Link>
@@ -45,8 +50,17 @@ function Navbar() {
               Sair
             </Link>
           </div>
+
         </div>
       </div>
+
+  )
+
+}
+
+  return (
+    <>
+      {component}
     </>
   )
 }

@@ -1,4 +1,5 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom"
+import { ToastContainer } from "react-toastify"
 import Footer from "./componentes/footer/Footer"
 import Navbar from "./componentes/navbar/Navbar"
 import Home from "./pages/home/Home"
@@ -10,8 +11,11 @@ import FormTema from "./componentes/tema/formtema/FormTema"
 import DeletarTema from "./componentes/tema/deletartema/DeletarTema"
 import ListaPostagens from "./componentes/postagem/listapostagem/ListaPostagem"
 import FormPostagem from "./componentes/postagem/formpostagem/FormPostagem"
-import DeletarPostagem from "./componentes/deletarpostagem/DeletarPostagem"
+import DeletarPostagem from "./componentes/postagem/deletarpostagem/DeletarPostagem"
 
+import 'react-toastify/dist/ReactToastify.css';
+import AtualizarPerfil from "./pages/perfil/AtualizrPerfil"
+import Perfil from "./pages/perfil/Perfil"
 
 
 
@@ -20,9 +24,10 @@ function App() {
   return (
     <>
     <AuthProvider>
+      <ToastContainer />
   <BrowserRouter>
     <Navbar />
-    <div className="min-h-[30vh]">
+    <div className="min-h-[80vh]">
       <Routes>
         // path é a rota, element é o componente que vai ser renderizado
         <Route path="/" element={<Login />} />
@@ -36,6 +41,8 @@ function App() {
           <Route path="/cadastrarpostagem" element={<FormPostagem />} />
           <Route path="/editarpostagem/:id" element={<FormPostagem />} />
           <Route path="/deletarpostagem/:id" element={<DeletarPostagem />} />
+          <Route path="/perfil" element={<Perfil />} />
+							<Route path="/atualizarusuario" element={<AtualizarPerfil />} />
       </Routes>
     </div>
     <Footer />

@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom"
 import type Usuario from "../../models/Usuario";
 import { cadastrarUsuario } from "../../services/Service";
 import { ClipLoader } from "react-spinners";
+import { ToastAlerta } from "../../utils/ToastAlerta";
 
 function Cadastro() {
 // Objeto responsável por redirecionar o usuário para uma outra rota
@@ -65,11 +66,11 @@ async function cadastrarNovoUsuario(e: FormEvent<HTMLFormElement>) {
       alert('Usuário Cadastrado com sucesso!')
 
    } catch (error) {
-  alert('Erro ao cadastrar o usuário!');
+  ToastAlerta("Erro ao cadastrar o usuário!", "erro");
 }
 
 } else {
-  alert('Dados do usuário estão inconsistentes!');
+  ToastAlerta("Dados do usuário estão inconsistentes!", "erro");
   setUsuario({
     ...usuario,
     senha: ''

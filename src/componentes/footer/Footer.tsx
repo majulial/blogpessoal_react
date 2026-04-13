@@ -1,4 +1,6 @@
 import { FacebookLogoIcon, InstagramLogoIcon, LinkedinLogoIcon } from "@phosphor-icons/react"
+import { useContext, type ReactNode } from "react";
+import { AuthContext } from "../../contexts/AuthContext";
 // Importa os ícones das redes sociais da biblioteca Phosphor Icons
 
 function Footer() {
@@ -6,8 +8,13 @@ function Footer() {
   let data = new Date().getFullYear()
   // Pega o ano atual automaticamente (ex: 2026)
 
-  return (
-    <>
+  const { usuario } = useContext(AuthContext);
+
+  let component: ReactNode;
+
+  if (usuario.token !== "") {
+    component = (
+   
       <div className="flex justify-center bg-indigo-900 text-white">
         {/* flex → ativa flexbox
            justify-center → centraliza horizontalmente o conteúdo
@@ -51,6 +58,13 @@ function Footer() {
 
         </div>
       </div>
+
+    )
+  }
+
+  return (
+    <>
+      {component}
     </>
   )
 }
