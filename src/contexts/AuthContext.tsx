@@ -1,4 +1,4 @@
-import { createContext, useState, type ReactNode } from "react";
+import { createContext, useRef, useState, type ReactNode } from "react";
 import type UsuarioLogin from "../models/UsuarioLogin";
 import { login } from "../services/Service";
 import { ToastAlerta } from "../utils/ToastAlerta";
@@ -11,6 +11,7 @@ interface AuthContextProps {
   handleLogout(): void
   handleLogin(usuario: UsuarioLogin): Promise<void>
   isLoading: boolean
+  isLogout: boolean
 }
 // 
 
@@ -39,6 +40,9 @@ const [usuario, setUsuario] = useState<UsuarioLogin>({
 // Inicializar o estado isLoading (controlar o loader do componente Login)
 const [isLoading, setIsLoading] = useState<boolean>(false);
 
+  //UseRef - Sinaliza se o logout foi feito pelo usuário (opção Sair)
+  const isLogout=useRef(false)//Imune a renderização
+
 // Implementação da função de Login
 async function handleLogin(usuarioLogin: UsuarioLogin){
     setIsLoading(true);
@@ -66,7 +70,7 @@ function handleLogout() {
 }
 
 return (
-    <AuthContext.Provider value={{ usuario, handleLogin, handleLogout, isLoading}}>
+    <AuthContext.Provider value={{ usuario, handleLogin, handleLogout, isLoading, isLogout: isLogout.current}}>
         {children}
     </AuthContext.Provider>
 )
